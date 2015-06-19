@@ -1,0 +1,28 @@
+---
+
+- name: TaskPlanner testing VM runtime and configuration
+  hosts: all
+  sudo: yes
+  tasks:
+
+## Toolchain and build tools
+
+  - name: Install build tools
+    yum: name=wget,unzip,python,libselinux-python,git,ant,ant-contrib,ant-nodeps,ant-junit,java-1.7.0-openjdk,java-1.7.0-openjdk-devel state=present
+
+## Maven
+
+  - name: Install maven EPEL repo
+    get_url: >
+      url=https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo
+      dest=/etc/yum.repos.d/epel-apache-maven.repo
+      mode=0644
+
+  - name: Install maven package
+    yum: name=apache-maven state=present
+
+  - name: Remove JDK6
+    command: rpm --nodeps -e java-1.6.0-openjdk java-1.6.0-openjdk-devel
+    register: rpm_result
+    failed_when: rpm_result.rc != 0 and ('is not installed' not in rpm_result.stderr)
+    changed_when: rpm_result.rc == 0

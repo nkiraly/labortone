@@ -68,7 +68,7 @@ public class TaskPlannerCLI {
     File resourceFile = new File(cl.getOptionValue("resourcefile"));
 
     Planner planner = new Planner();
-    
+
     if (cl.hasOption("solverclass")) {
       planner.setSolverClass(cl.getOptionValue("solverclass"));
     }
@@ -99,7 +99,9 @@ public class TaskPlannerCLI {
 
     planner.solve();
 
-    planner.outputSolution();
+    String solutionYaml = planner.getSolutionYaml();
+
+    System.out.println(solutionYaml);
   }
 
   public static void showHelp(Options options) {

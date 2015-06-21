@@ -2,7 +2,7 @@ package com.nicholaskiraly.research.taskplanner;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedHashMap;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,27 +10,36 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Test that input files can be loaded by the planner API
+ */
 public class InputFileLoadTest {
-  
+
   public InputFileLoadTest() {
   }
-  
+
   @BeforeClass
   public static void setUpClass() {
   }
-  
+
   @AfterClass
   public static void tearDownClass() {
   }
-  
+
   @Before
   public void setUp() {
   }
-  
+
   @After
   public void tearDown() {
   }
 
+  /**
+   * Test that a tasks definition yaml file can be loaded by the planner API
+   *
+   * @throws IOException
+   * @throws TaskPlannerException
+   */
   @Test
   public void testLoadTasksFromFile() throws IOException, TaskPlannerException {
     String taskFileName = "/tasks001.yml";
@@ -42,13 +51,19 @@ public class InputFileLoadTest {
 
     planner.loadTasksFromFile(taskFile);
 
-    LinkedHashMap taskMap = planner.getTaskMap();
+    Map taskMap = planner.getTaskMap();
 
     assertNotNull("Task Map is null", taskMap);
 
     assertNotEquals("Task file " + taskFileName + " load resulted in 0 tasks in list", taskMap.size(), 0);
   }
 
+  /**
+   * Test that a resources definition yaml file can be loaded by the planner API
+   *
+   * @throws IOException
+   * @throws TaskPlannerException
+   */
   @Test
   public void testLoadResourcesFromFile() throws IOException, TaskPlannerException {
     String resourceFileName = "/resources001.yml";
@@ -60,7 +75,7 @@ public class InputFileLoadTest {
 
     planner.loadResourcesFromFile(resourceFile);
 
-    LinkedHashMap resourceMap = planner.getResourceMap();
+    Map resourceMap = planner.getResourceMap();
 
     assertNotNull("Resource Map is null", resourceMap);
 

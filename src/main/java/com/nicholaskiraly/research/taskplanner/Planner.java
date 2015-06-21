@@ -16,12 +16,12 @@ public class Planner {
   /**
    * Tasks to be performed
    */
-  protected LinkedHashMap taskMap;
+  protected Map taskMap;
 
   /**
    * Computing resources available
    */
-  protected LinkedHashMap resourceMap;
+  protected Map resourceMap;
 
   /**
    * Solution Plan Steps
@@ -40,7 +40,7 @@ public class Planner {
     this.taskMap = map;
   }
 
-  public LinkedHashMap getTaskMap() {
+  public Map getTaskMap() {
     return this.taskMap;
   }
 
@@ -56,7 +56,7 @@ public class Planner {
     this.resourceMap = map;
   }
   
-  public LinkedHashMap getResourceMap() {
+  public Map getResourceMap() {
     return this.resourceMap;
   }
   
@@ -97,11 +97,11 @@ public class Planner {
   public Map getSolutionMap() {
     return this.solutionMap;
   }
-
-  public void outputSolution() {
+  
+  public String getSolutionYaml() {
     Yaml yaml = new Yaml();
-    String output = yaml.dump(this.solutionMap);
-    System.out.println(output);
+    String solutionYaml = yaml.dump(this.solutionMap);
+    return solutionYaml;
   }
 
 }

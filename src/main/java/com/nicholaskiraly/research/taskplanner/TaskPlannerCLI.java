@@ -36,6 +36,12 @@ public class TaskPlannerCLI {
             .withArgName("resources.yml")
             .create("r");
     options.addOption(resourcefile);
+    Option solverClass = OptionBuilder.withLongOpt("solverclass")
+            .withDescription("plan solver class to use")
+            .hasArg()
+            .withArgName("className")
+            .create("c");
+    options.addOption(solverClass);
 
     CommandLine cl = null;
     try {
@@ -62,6 +68,10 @@ public class TaskPlannerCLI {
     File resourceFile = new File(cl.getOptionValue("resourcefile"));
 
     Planner planner = new Planner();
+    
+    if (cl.hasOption("solverclass")) {
+      planner.setSolutionClass(cl.getOptionValue("solverclass"));
+    }
 
     try {
       planner.loadTasksFromFile(taskFile);

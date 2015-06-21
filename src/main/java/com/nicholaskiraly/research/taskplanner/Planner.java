@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 import org.yaml.snakeyaml.Yaml;
 
@@ -56,8 +58,39 @@ public class Planner {
   public LinkedHashMap getResourceMap() {
     return this.resourceMap;
   }
+  
+  /**
+   * Solver class to use when calculating the solution
+   */
+  protected String solutionClass = "SolutionSolverStatic";
+  
+  public void setSolutionClass(String className) {
+    this.solutionClass = className;
+  }
+  
+  public String getSolutionClass() {
+    return this.solutionClass;
+  }
 
   public void calculateSolution() {
+    try {
+      Class clazz = Class.forName(this.solutionClass);
+      SolutionSolverInterface ps = (SolutionSolverInterface) clazz.newInstance();
+      this.solutionMap = ps.solve(this.taskMap, this.resourceMap);
+    } catch (ClassNotFoundException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("calculateSolution ClassNotFoundException: " + ex.getMessage());
+      System.exit(2);
+    } catch (InstantiationException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("calculateSolution InstantiationException: " + ex.getMessage());
+      System.exit(2);
+    } catch (IllegalAccessException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("calculateSolution IllegalAccessException: " + ex.getMessage());
+      System.exit(2);
+    }
+
   }
   
   public LinkedHashMap getSolutionMap() {

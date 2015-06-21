@@ -3,11 +3,35 @@ package com.nicholaskiraly.research.taskplanner;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class InputFileLoadTests extends TestCase {
+public class InputFileLoadTest {
+  
+  public InputFileLoadTest() {
+  }
+  
+  @BeforeClass
+  public static void setUpClass() {
+  }
+  
+  @AfterClass
+  public static void tearDownClass() {
+  }
+  
+  @Before
+  public void setUp() {
+  }
+  
+  @After
+  public void tearDown() {
+  }
 
+  @Test
   public void testLoadTasksFromFile() throws IOException, TaskPlannerException {
     String taskFileName = "/tasks001.yml";
     assertNotNull("Tasks resource " + taskFileName + " not found on class path", getClass().getResource(taskFileName));
@@ -25,6 +49,7 @@ public class InputFileLoadTests extends TestCase {
     assertNotEquals("Task file " + taskFileName + " load resulted in 0 tasks in list", taskMap.size(), 0);
   }
 
+  @Test
   public void testLoadResourcesFromFile() throws IOException, TaskPlannerException {
     String resourceFileName = "/resources001.yml";
     assertNotNull("Resources resource " + resourceFileName + " not found on class path", getClass().getResource(resourceFileName));

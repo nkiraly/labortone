@@ -62,20 +62,20 @@ public class Planner {
   /**
    * Solver class to use when calculating the solution
    */
-  protected String solutionClass = "SolutionSolverStatic";
+  protected String solverClass = "SolutionSolverStatic";
   
-  public void setSolutionClass(String className) {
-    this.solutionClass = className;
+  public void setSolverClass(String className) {
+    this.solverClass = className;
   }
   
-  public String getSolutionClass() {
-    return this.solutionClass;
+  public String getSolverClass() {
+    return this.solverClass;
   }
 
-  public void calculateSolution() {
+  public void solve() {
     try {
-      Class clazz = Class.forName(this.solutionClass);
-      SolutionSolverInterface ps = (SolutionSolverInterface) clazz.newInstance();
+      Class clazz = Class.forName(this.solverClass);
+      PlanSolverInterface ps = (PlanSolverInterface) clazz.newInstance();
       this.solutionMap = ps.solve(this.taskMap, this.resourceMap);
     } catch (ClassNotFoundException ex) {
       Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);

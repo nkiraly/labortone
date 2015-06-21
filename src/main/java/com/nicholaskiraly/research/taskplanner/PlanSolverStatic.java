@@ -2,7 +2,7 @@ package com.nicholaskiraly.research.taskplanner;
 
 import java.util.LinkedHashMap;
 
-public class SolutionSolverStatic implements SolutionSolverInterface {
+public class PlanSolverStatic implements PlanSolverInterface {
 
   public LinkedHashMap solve(LinkedHashMap taskMap, LinkedHashMap resourceMap) {
     LinkedHashMap map = new LinkedHashMap();

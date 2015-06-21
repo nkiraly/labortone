@@ -70,7 +70,7 @@ public class TaskPlannerCLI {
     Planner planner = new Planner();
     
     if (cl.hasOption("solverclass")) {
-      planner.setSolutionClass(cl.getOptionValue("solverclass"));
+      planner.setSolverClass(cl.getOptionValue("solverclass"));
     }
 
     try {
@@ -97,7 +97,7 @@ public class TaskPlannerCLI {
       System.exit(2);
     }
 
-    planner.calculateSolution();
+    planner.solve();
 
     planner.outputSolution();
   }

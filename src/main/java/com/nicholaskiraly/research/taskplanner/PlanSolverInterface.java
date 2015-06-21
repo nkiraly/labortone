@@ -1,9 +1,12 @@
 package com.nicholaskiraly.research.taskplanner;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
+/**
+ * Interface for taskplanner solution calculators
+ */
 public interface PlanSolverInterface {
 
-  public LinkedHashMap solve(LinkedHashMap taskMap, LinkedHashMap resourceMap);
+  public Map solve(Map taskMap, Map resourceMap);
 
 }

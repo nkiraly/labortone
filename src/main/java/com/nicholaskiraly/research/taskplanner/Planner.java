@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
@@ -25,7 +26,7 @@ public class Planner {
   /**
    * Solution Plan Steps
    */
-  protected LinkedHashMap solutionMap;
+  protected Map solutionMap;
 
   public void loadTasksFromFile(File taskFile) throws FileNotFoundException, IOException, TaskPlannerException {
     FileInputStream taskFIS = new FileInputStream(taskFile);
@@ -93,7 +94,7 @@ public class Planner {
 
   }
   
-  public LinkedHashMap getSolutionMap() {
+  public Map getSolutionMap() {
     return this.solutionMap;
   }
 

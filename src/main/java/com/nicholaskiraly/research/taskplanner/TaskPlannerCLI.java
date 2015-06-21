@@ -1,6 +1,8 @@
 package com.nicholaskiraly.research.taskplanner;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
@@ -61,13 +63,33 @@ public class TaskPlannerCLI {
 
     Planner planner = new Planner();
 
-    planner.loadTasksFromFile(taskFile);
+    try {
+      planner.loadTasksFromFile(taskFile);
+    } catch (IOException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("loadTasksFromFile IOException: " + ex.getMessage());
+      System.exit(2);
+    } catch (TaskPlannerException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("loadTasksFromFile TaskPlannerException: " + ex.getMessage());
+      System.exit(2);
+    }
 
-    planner.loadResourcesFromFile(resourceFile);
+    try {
+      planner.loadResourcesFromFile(resourceFile);
+    } catch (IOException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("loadResourcesFromFile IOException: " + ex.getMessage());
+      System.exit(2);
+    } catch (TaskPlannerException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("loadResourcesFromFile TaskPlannerException: " + ex.getMessage());
+      System.exit(2);
+    }
 
-    planner.calculatePlan();
+    planner.calculateSolution();
 
-    planner.outputPlan();
+    planner.outputSolution();
   }
 
   public static void showHelp(Options options) {

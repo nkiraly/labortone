@@ -1,44 +1,73 @@
 package com.nicholaskiraly.research.taskplanner;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import org.apache.commons.io.IOUtils;
+import org.yaml.snakeyaml.Yaml;
 
 public class Planner {
 
   /**
-   * List of Tasks to be performed
+   * Tasks to be performed
    */
-  protected ArrayList<Task> tasks;
+  protected LinkedHashMap taskMap;
 
   /**
-   * List of computing resources available
+   * Computing resources available
    */
-  protected ArrayList<ComputeResource> resources;
+  protected LinkedHashMap resourceMap;
 
   /**
    * Solution Plan Steps
    */
-  protected ArrayList<PlanStep> steps;
+  protected LinkedHashMap solutionMap;
 
-  public void loadTasksFromFile(File taskFile) {
+  public void loadTasksFromFile(File taskFile) throws FileNotFoundException, IOException, TaskPlannerException {
+    FileInputStream taskFIS = new FileInputStream(taskFile);
+    Yaml yaml = new Yaml();
+    String taskContent = IOUtils.toString(taskFIS);
+    LinkedHashMap map = (LinkedHashMap)yaml.load(taskContent);
+    if ( map.size() == 0 ) {
+      throw new TaskPlannerException("No tasks found in taskFile " + taskFile.getPath());
+    }
+    //System.out.println(map);
+    this.taskMap = map;
   }
 
-  public ArrayList<Task> getTasks() {
-    return this.tasks;
+  public LinkedHashMap getTaskMap() {
+    return this.taskMap;
   }
 
-  public void loadResourcesFromFile(File resourceFile) {
+  public void loadResourcesFromFile(File resourceFile) throws FileNotFoundException, IOException, TaskPlannerException {
+    FileInputStream resourceFIS = new FileInputStream(resourceFile);
+    Yaml yaml = new Yaml();
+    String resourceContent = IOUtils.toString(resourceFIS);
+    LinkedHashMap map = (LinkedHashMap)yaml.load(resourceContent);
+    if ( map.size() == 0 ) {
+      throw new TaskPlannerException("No resources found in resourceFile " + resourceFile.getPath());
+    }
+    //System.out.println(map);
+    this.resourceMap = map;
   }
   
-  public ArrayList<ComputeResource> getResources() {
-    return this.resources;
+  public LinkedHashMap getResourceMap() {
+    return this.resourceMap;
   }
 
-  public void calculatePlan() {
+  public void calculateSolution() {
+  }
+  
+  public LinkedHashMap getSolutionMap() {
+    return this.solutionMap;
   }
 
-  public void outputPlan() {
-
+  public void outputSolution() {
+    Yaml yaml = new Yaml();
+    String output = yaml.dump(this.solutionMap);
+    System.out.println(output);
   }
 
 }

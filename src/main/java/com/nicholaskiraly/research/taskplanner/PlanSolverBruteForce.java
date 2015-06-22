@@ -43,7 +43,7 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
       
       // TODO: resource concurrency management ?
 
-      // TODO: resource aggregat time usage optimization ?
+      // TODO: resource aggregate time usage optimization ?
       
     }
     return resourcesMetPlanMap;

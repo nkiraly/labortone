@@ -92,6 +92,8 @@ public class SolverComparisonTest {
     return new Object[][]{
       {"PlanSolverStatic",     "/tasks001.yml", "/resources001.yml", "/plan001.yml"},
       {"PlanSolverBruteForce", "/tasks001.yml", "/resources001.yml", "/plan001.yml"},
+      {"PlanSolverStatic",     "/tasks003.yml", "/resources003.yml", "/plan003.yml"},
+      {"PlanSolverBruteForce", "/tasks003.yml", "/resources003.yml", "/plan003.yml"},
     };
   }
 

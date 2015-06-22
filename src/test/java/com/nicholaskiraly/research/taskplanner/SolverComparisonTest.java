@@ -54,7 +54,7 @@ public class SolverComparisonTest {
     String resourceFileName = "/resources001.yml";
     File resourceFile = new File(getClass().getResource(resourceFileName).getFile());
 
-    Planner planner = new Planner();
+    TaskPlanner planner = new TaskPlanner();
 
     planner.loadTasksFromFile(taskFile);
 

@@ -15,7 +15,7 @@ import com.nicholaskiraly.research.taskplanner.PlanSolverStatic;
 import com.nicholaskiraly.research.taskplanner.PlanSolverBruteForce;
 import org.yaml.snakeyaml.DumperOptions;
 
-public class Planner {
+public class TaskPlanner {
 
   /**
    * Tasks to be performed

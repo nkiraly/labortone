@@ -67,7 +67,7 @@ public class TaskPlannerCLI {
     }
     File resourceFile = new File(cl.getOptionValue("resourcefile"));
 
-    Planner planner = new Planner();
+    TaskPlanner planner = new TaskPlanner();
 
     if (cl.hasOption("solverclass")) {
       planner.setSolverClass(cl.getOptionValue("solverclass"));

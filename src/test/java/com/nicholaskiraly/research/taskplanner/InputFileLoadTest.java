@@ -47,7 +47,7 @@ public class InputFileLoadTest {
     File taskFile = new File(getClass().getResource(taskFileName).getFile());
     assertTrue("Tasks file " + taskFileName + " does not exist", taskFile.exists());
 
-    Planner planner = new Planner();
+    TaskPlanner planner = new TaskPlanner();
 
     planner.loadTasksFromFile(taskFile);
 
@@ -71,7 +71,7 @@ public class InputFileLoadTest {
     File resourceFile = new File(getClass().getResource(resourceFileName).getFile());
     assertTrue("Resources file " + resourceFileName + " does not exist", resourceFile.exists());
 
-    Planner planner = new Planner();
+    TaskPlanner planner = new TaskPlanner();
 
     planner.loadResourcesFromFile(resourceFile);
 

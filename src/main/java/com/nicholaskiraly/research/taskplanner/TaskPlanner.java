@@ -10,9 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 import org.yaml.snakeyaml.Yaml;
-// import the PlanSolver classes so they can be referenced by short name in solve()
-import com.nicholaskiraly.research.taskplanner.PlanSolverStatic;
-import com.nicholaskiraly.research.taskplanner.PlanSolverBruteForce;
 import org.yaml.snakeyaml.DumperOptions;
 
 public class TaskPlanner {

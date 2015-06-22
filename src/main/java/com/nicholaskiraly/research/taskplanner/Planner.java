@@ -10,6 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 import org.yaml.snakeyaml.Yaml;
+// import the PlanSolver classes so they can be referenced by short name in solve()
+import com.nicholaskiraly.research.taskplanner.PlanSolverStatic;
+import com.nicholaskiraly.research.taskplanner.PlanSolverBruteForce;
 
 public class Planner {
 
@@ -66,6 +69,11 @@ public class Planner {
   protected String solverClass = "SolutionSolverStatic";
   
   public void setSolverClass(String className) {
+    // if there are no namespace qualifiers on the class
+    // prefix it with  com.nicholaskiraly.research.taskplanner.
+    if (className.indexOf(".") == -1) {
+      className = "com.nicholaskiraly.research.taskplanner." + className;
+    }
     this.solverClass = className;
   }
   

@@ -1,5 +1,7 @@
 package com.nicholaskiraly.research.taskplanner;
 
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -46,12 +48,10 @@ public class SolverComparisonTest {
    * @throws TaskPlannerException
    */
   @Test
-  public void testPlanSolverBruteForce() throws IOException, FileNotFoundException, TaskPlannerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+  @UseDataProvider("providePlanSolverVariants")
+  public void testPlanSolverBruteForce(String taskFileName, String resourceFileName, String planSolverClass, String expectedPlanFileName) throws IOException, FileNotFoundException, TaskPlannerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
-    String taskFileName = "/tasks001.yml";
     File taskFile = new File(getClass().getResource(taskFileName).getFile());
-
-    String resourceFileName = "/resources001.yml";
     File resourceFile = new File(getClass().getResource(resourceFileName).getFile());
 
     TaskPlanner planner = new TaskPlanner();
@@ -60,17 +60,30 @@ public class SolverComparisonTest {
 
     planner.loadResourcesFromFile(resourceFile);
 
-    planner.setSolverClass("PlanSolverBruteForce");
+    planner.setSolverClass(planSolverClass);
 
     planner.solve();
 
     String planYamlString = planner.getSolutionYaml();
 
-    String planFileName = "/plan001.yml";
-    File planFile = new File(getClass().getResource(planFileName).getFile());
-    String expectedPlanYamlString = IOUtils.toString(planFile.toURI());
+    File expectedPlanFile = new File(getClass().getResource(expectedPlanFileName).getFile());
+    String expectedPlanYamlString = IOUtils.toString(expectedPlanFile.toURI());
 
     assertEquals(expectedPlanYamlString, planYamlString);
+  }
+  
+  /**
+   * Tasks YAML file resource name Provider
+   *
+   * for more info, see https://github.com/TNG/junit-dataprovider/wiki/Getting-started#usage
+   *
+   * @return
+   */
+  @DataProvider
+  public static String[][] providePlanSolverVariants() {
+    return new String[][]{
+      {"/tasks001.yml", "/resources001.yml", "PlanSolverBruteForce", "/plan001.yml"},
+    };
   }
 
 }

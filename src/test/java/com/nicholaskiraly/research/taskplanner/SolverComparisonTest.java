@@ -1,6 +1,7 @@
 package com.nicholaskiraly.research.taskplanner;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,12 +14,14 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 /**
  * Test that PlanSolver implementations yield the same result as the
  * PlanSolverStatic baseline implementation
  */
+@RunWith(DataProviderRunner.class)
 public class SolverComparisonTest {
 
   public SolverComparisonTest() {
@@ -80,8 +83,8 @@ public class SolverComparisonTest {
    * @return
    */
   @DataProvider
-  public static String[][] providePlanSolverVariants() {
-    return new String[][]{
+  public static Object[][] providePlanSolverVariants() {
+    return new Object[][]{
       {"/tasks001.yml", "/resources001.yml", "PlanSolverBruteForce", "/plan001.yml"},
     };
   }

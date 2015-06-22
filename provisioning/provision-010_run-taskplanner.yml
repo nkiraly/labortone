@@ -1,0 +1,26 @@
+#!/bin/bash
+
+this_machine_ip=$1
+
+ansible=`which ansible-playbook 2>/dev/null`
+
+# abort on error
+set -e
+
+# if ansible was not found, error
+if [[ -z $ansible ]]; then
+  echo "ansible-playbook not found. step 001 should have installed it"
+  exit 10
+fi
+
+# switch to vagrant shared folder from hosts' project working dir
+cd /vagrant
+
+# do a full fresh build of the taskplanner jar
+mvn clean verify
+
+# run the taskplanner application with sample data file resources in the projectg
+# these are the same file resources the junit tests use
+java -jar target/TaskPlanner.jar \
+  --taskfile src/test/resources/tasks001.yml \
+  --resourcefile src/test/resources/resources001.yml

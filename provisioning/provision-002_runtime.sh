@@ -13,12 +13,12 @@ if [[ -z $ansible ]]; then
   exit 10
 fi
 
-# switch to vagrant shared folder from host current working dir
+# switch to vagrant shared folder from hosts' project working dir
 cd /vagrant
 
 # use ansible to provision this VM with runtime and configuration we need to run the taskplanner java jar
+# inventory string 'localhost,' makes python consider the text a list and ansible will run with this
 $ansible \
-  # inventory host, makes python consider the text a list and ansible will run with this
   -i 'localhost,' \
   -c local \
   provisioning/provision-002_runtime.yml

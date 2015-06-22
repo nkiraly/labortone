@@ -15,3 +15,8 @@ if [[ -z $ansible ]]; then
   hash -r
   ansible=`which ansible-playbook 2>/dev/null`
 fi
+
+if [[ -z $ansible ]]; then
+  echo "ansible-playbook still not found after yum install ansible"
+  exit 10
+fi

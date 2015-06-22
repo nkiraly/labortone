@@ -47,6 +47,10 @@ Vagrant.configure('2') do |config|
         # ansible.verbose = 'vvvv'
       end
     end
+
+    # provision step 010
+    # specify a shell provisioner to build taskplanner jar and run it
+    taskplanner.vm.provision 'shell', path: 'provisioning/provision-010_run-taskplanner.yml', args: [MACHINE_IP], privileged: false
   end
 
 end

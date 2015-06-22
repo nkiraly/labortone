@@ -2,6 +2,8 @@
 
 this_machine_ip=$1
 
+echo "TaskPlanner Provisioning 002 Starting - java runtime and toolchain configuration"
+
 ansible=`which ansible-playbook 2>/dev/null`
 
 # abort on error

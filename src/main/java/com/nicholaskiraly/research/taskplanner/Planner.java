@@ -13,6 +13,7 @@ import org.yaml.snakeyaml.Yaml;
 // import the PlanSolver classes so they can be referenced by short name in solve()
 import com.nicholaskiraly.research.taskplanner.PlanSolverStatic;
 import com.nicholaskiraly.research.taskplanner.PlanSolverBruteForce;
+import org.yaml.snakeyaml.DumperOptions;
 
 public class Planner {
 
@@ -66,7 +67,7 @@ public class Planner {
   /**
    * Solver class to use when calculating the solution
    */
-  protected String solverClass = "SolutionSolverStatic";
+  protected String solverClass = "com.nicholaskiraly.research.taskplanner.PlanSolverStatic";
   
   public void setSolverClass(String className) {
     // if there are no namespace qualifiers on the class
@@ -92,7 +93,10 @@ public class Planner {
   }
   
   public String getSolutionYaml() {
-    Yaml yaml = new Yaml();
+    // use dumper flowstyle BLOCK to put newlines for each entry instead of a comma
+    DumperOptions options = new DumperOptions();
+    options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+    Yaml yaml = new Yaml(options);
     String solutionYaml = yaml.dump(this.solutionMap);
     return solutionYaml;
   }

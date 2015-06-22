@@ -11,7 +11,7 @@ To run the TaskPlanner application, build the maven project and run the jar with
 ```bash
 $ mvn clean verify
 
-$ java -jar target/TaskPlanner.jar \
+$ java -jar target/taskplanner-0.1.0-SNAPSHOT-withdepends.jar \
   --taskfile src/test/resources/tasks001.yml \
   --resourcefile src/test/resources/resources001.yml
 ```
@@ -22,10 +22,16 @@ Or wind up the vagrant and virtualbox CentOS VM with
 $ vagrant up
 ```
 
-To test changes or run the solution again, you only need to run vagrant provisioning steps again:
+To test code changes or run the solution again, you only need to run vagrant provisioning steps again:
 
 ```bash
 $ vagrant provision
+```
+
+If you want to get in the VM and poke things, you get into the box with:
+
+```bash
+$ vagrant ssh
 ```
 
 # Developing

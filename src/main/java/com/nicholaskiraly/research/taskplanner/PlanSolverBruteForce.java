@@ -3,7 +3,7 @@ package com.nicholaskiraly.research.taskplanner;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class PlanSolverStatic implements PlanSolverInterface {
+public class PlanSolverBruteForce implements PlanSolverInterface {
 
   @Override
   public Map solve(Map taskMap, Map resourceMap) {

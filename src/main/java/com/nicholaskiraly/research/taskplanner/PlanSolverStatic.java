@@ -8,14 +8,14 @@ import org.yaml.snakeyaml.Yaml;
  * Baseline static plan solver to compare various planner implementations against
  */
 public class PlanSolverStatic implements PlanSolverInterface {
-  
+
   public static String solutionYamlString = null;
   public static Map solutionMap = null;
-  
+
   public static void setSolutionYamlString(String solutionYamlString) {
     Yaml yaml = new Yaml();
     PlanSolverStatic.solutionYamlString = solutionYamlString;
-    PlanSolverStatic.solutionMap = (LinkedHashMap)yaml.load(PlanSolverStatic.solutionYamlString);
+    PlanSolverStatic.solutionMap = (LinkedHashMap) yaml.load(PlanSolverStatic.solutionYamlString);
   }
 
   @Override

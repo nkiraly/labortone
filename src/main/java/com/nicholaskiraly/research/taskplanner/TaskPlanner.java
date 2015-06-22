@@ -33,8 +33,8 @@ public class TaskPlanner {
     FileInputStream taskFIS = new FileInputStream(taskFile);
     Yaml yaml = new Yaml();
     String taskContent = IOUtils.toString(taskFIS);
-    LinkedHashMap map = (LinkedHashMap)yaml.load(taskContent);
-    if ( map.size() == 0 ) {
+    LinkedHashMap map = (LinkedHashMap) yaml.load(taskContent);
+    if (map.size() == 0) {
       throw new TaskPlannerException("No tasks found in taskFile " + taskFile.getPath());
     }
     //System.out.println(map);
@@ -49,14 +49,14 @@ public class TaskPlanner {
     FileInputStream resourceFIS = new FileInputStream(resourceFile);
     Yaml yaml = new Yaml();
     String resourceContent = IOUtils.toString(resourceFIS);
-    LinkedHashMap map = (LinkedHashMap)yaml.load(resourceContent);
-    if ( map.size() == 0 ) {
+    LinkedHashMap map = (LinkedHashMap) yaml.load(resourceContent);
+    if (map.size() == 0) {
       throw new TaskPlannerException("No resources found in resourceFile " + resourceFile.getPath());
     }
     //System.out.println(map);
     this.resourceMap = map;
   }
-  
+
   public Map getResourceMap() {
     return this.resourceMap;
   }
@@ -68,9 +68,9 @@ public class TaskPlanner {
   protected String solverClass = "com.nicholaskiraly.research.taskplanner.PlanSolverBruteForce";
   
   public void setSolverClass(String className) {
-    // if there are no namespace qualifiers on the class
+    // if there are no period namespace delimiters in the className
     // prefix it with  com.nicholaskiraly.research.taskplanner.
-    if (className.indexOf(".") == -1) {
+    if (!className.contains(".")) {
       className = "com.nicholaskiraly.research.taskplanner." + className;
     }
     this.solverClass = className;
@@ -85,11 +85,11 @@ public class TaskPlanner {
     PlanSolverInterface ps = (PlanSolverInterface) clazz.newInstance();
     this.solutionMap = ps.solve(this.taskMap, this.resourceMap);
   }
-  
+
   public Map getSolutionMap() {
     return this.solutionMap;
   }
-  
+
   public String getSolutionYaml() {
     // use dumper flowstyle BLOCK to put newlines for each entry instead of a comma
     DumperOptions options = new DumperOptions();

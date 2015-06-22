@@ -20,6 +20,7 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
     List<Map.Entry<String, Map>> taskList = new LinkedList<>(taskMap.entrySet());
     List<Map.Entry<String, Integer>> resourceList = new LinkedList<>(resourceMap.entrySet());
 
+    // spin on each task, find it a resourcce to run on that has enough cores
     for (Iterator<Map.Entry<String, Map>> tlit = taskList.iterator(); tlit.hasNext();) {
       Map.Entry<String, Map> taskEntry = tlit.next();
 
@@ -33,24 +34,23 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
         Map.Entry<String, Integer> resourceEntry = rlit.next();
         String resourceName = resourceEntry.getKey();
         Integer resourceCores = resourceEntry.getValue();
-        
+
         // if the resource has enough cores for the task, make the plan step use the resource
-        if ( resourceCores >= taskCores ) {
+        if (resourceCores >= taskCores) {
           resourcesMetPlanMap.put(taskName, resourceName);
           break;
         }
       }
-      
-      // TODO: resource concurrency management ?
 
-      // TODO: resource aggregate time usage optimization ?
-      
+      // TODO: resource concurrency management ?
+      // TODO: task aggregate time resource usage optimization ?
     }
     return resourcesMetPlanMap;
   }
 
   /**
    * Order task dependencies by ordering the tasks based on parent_tasks specified
+   *
    * @param taskMap
    * @return Map
    */
@@ -76,8 +76,7 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
 
         if (o1Props.get("parent_tasks") == null) {
           // no parent tasks in o1
-        }
-        else {
+        } else {
           // check o1 parent task dependencies
           String[] o1ParentTasks = o1Props.get("parent_tasks").toString().trim().split(",\\s*");
           for (String o1ParentTask : o1ParentTasks) {
@@ -87,11 +86,10 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
             }
           }
         }
-        
+
         if (o2Props.get("parent_tasks") == null) {
           // no parent tasks in o2
-        }
-        else {
+        } else {
           // check o2 parent task dependencies
           String[] o2ParentTasks = o2Props.get("parent_tasks").toString().trim().split(",\\s*");
           for (String o2ParentTask : o2ParentTasks) {

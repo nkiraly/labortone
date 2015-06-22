@@ -44,6 +44,14 @@ public class PlanSolverBruteForceTest {
   public void tearDown() {
   }
 
+  /**
+   * Test that the Task definition file dependency ordering implementation
+   * actually does that
+   *
+   * @param taskFileName
+   * @throws FileNotFoundException
+   * @throws IOException
+   */
   @Test
   @UseDataProvider("provideTaskFileResources")
   public void testOrderTaskDepends(String taskFileName) throws FileNotFoundException, IOException {
@@ -71,13 +79,14 @@ public class PlanSolverBruteForceTest {
     assertEquals("Second task is not task2", "task2", sortedKeyArray[1]);
     assertEquals("Third task is not task3", "task3", sortedKeyArray[2]);
   }
-  
+
   /**
    * Tasks YAML file resource name Provider
-   * 
-   * for more info, see https://github.com/TNG/junit-dataprovider/wiki/Getting-started#usage
-   * 
-   * @return 
+   *
+   * for more info, see
+   * https://github.com/TNG/junit-dataprovider/wiki/Getting-started#usage
+   *
+   * @return
    */
   @DataProvider
   public static String[] provideTaskFileResources() {
@@ -85,8 +94,7 @@ public class PlanSolverBruteForceTest {
       "/tasks002_unsorted001.yml",
       "/tasks002_unsorted002.yml",
       "/tasks002_unsorted003.yml",
-      "/tasks002_unsorted004.yml",
-    };
+      "/tasks002_unsorted004.yml",};
   }
 
 }

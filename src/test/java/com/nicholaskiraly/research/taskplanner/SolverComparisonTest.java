@@ -18,8 +18,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 /**
- * Test that PlanSolver implementations yield the same result as the
- * PlanSolverStatic baseline implementation
+ * Test that PlanSolver implementations yield the expected plan
  */
 @RunWith(DataProviderRunner.class)
 public class SolverComparisonTest {
@@ -64,12 +63,12 @@ public class SolverComparisonTest {
     planner.loadResourcesFromFile(resourceFile);
 
     planner.setSolverClass(planSolverClass);
-    
+
     File expectedPlanFile = new File(getClass().getResource(expectedPlanFileName).getFile());
     String expectedPlanYamlString = IOUtils.toString(expectedPlanFile.toURI());
-    
+
     // special case to load expectedPlan yaml PlanSolver is Static baseline implementation
-    if ( planSolverClass.equals("PlanSolverStatic") ) {
+    if (planSolverClass.equals("PlanSolverStatic")) {
       PlanSolverStatic.setSolutionYamlString(expectedPlanYamlString);
     }
 
@@ -81,7 +80,7 @@ public class SolverComparisonTest {
   }
   
   /**
-   * Tasks YAML file resource name Provider
+   * Solver test file sets
    *
    * for more info, see https://github.com/TNG/junit-dataprovider/wiki/Getting-started#usage
    *

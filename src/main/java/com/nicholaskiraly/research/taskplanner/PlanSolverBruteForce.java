@@ -19,10 +19,13 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
     map.put("task2", "compute1");
     map.put("task3", "compute3");
     return map;
-
-    // calculate task dependencies by ordering the tasks as such
   }
 
+  /**
+   * Calculate task dependencies by ordering the tasks based on parent_tasks specified
+   * @param taskMap
+   * @return Map
+   */
   public Map calculateTaskDepends(Map taskMap) {
 
     // Convert Task Map to List of entries

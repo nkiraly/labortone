@@ -12,8 +12,10 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
 
   @Override
   public Map solve(Map taskMap, Map resourceMap) {
-    Map sortedTaskMap = this.calculateTaskDepends(taskMap);
+    Map sortedTaskMap = this.orderTaskDepends(taskMap);
     
+    // now with a dependency sorted task map
+    // create a job schedule that will meet the requirements of the job dependencies
     LinkedHashMap map = new LinkedHashMap();
     map.put("task1", "compute1");
     map.put("task2", "compute1");
@@ -22,11 +24,11 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
   }
 
   /**
-   * Calculate task dependencies by ordering the tasks based on parent_tasks specified
+   * Order task dependencies by ordering the tasks based on parent_tasks specified
    * @param taskMap
    * @return Map
    */
-  public Map calculateTaskDepends(Map taskMap) {
+  public Map orderTaskDepends(Map taskMap) {
 
     // Convert Task Map to List of entries
     // TaskMap has a LinkedHashMap for values from the task details in yaml

@@ -46,7 +46,7 @@ public class PlanSolverBruteForceTest {
 
   @Test
   @UseDataProvider("provideTaskFileResources")
-  public void testCalculateTaskDepends(String taskFileName) throws FileNotFoundException, IOException {
+  public void testOrderTaskDepends(String taskFileName) throws FileNotFoundException, IOException {
     assertNotNull("Tasks resource " + taskFileName + " not found on class path", getClass().getResource(taskFileName));
     File taskFile = new File(getClass().getResource(taskFileName).getFile());
     assertTrue("Tasks file " + taskFileName + " does not exist", taskFile.exists());
@@ -61,7 +61,7 @@ public class PlanSolverBruteForceTest {
 
     PlanSolverBruteForce psbf = new PlanSolverBruteForce();
 
-    Map sortedTaskMap = psbf.calculateTaskDepends(unsortedTaskMap);
+    Map sortedTaskMap = psbf.orderTaskDepends(unsortedTaskMap);
 
     // confirm task dependency order
     Set sortedTaskKeySet = sortedTaskMap.keySet();

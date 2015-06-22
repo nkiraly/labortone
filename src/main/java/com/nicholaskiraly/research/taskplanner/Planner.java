@@ -73,25 +73,10 @@ public class Planner {
     return this.solverClass;
   }
 
-  public void solve() {
-    try {
-      Class clazz = Class.forName(this.solverClass);
-      PlanSolverInterface ps = (PlanSolverInterface) clazz.newInstance();
-      this.solutionMap = ps.solve(this.taskMap, this.resourceMap);
-    } catch (ClassNotFoundException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
-      System.err.println("calculateSolution ClassNotFoundException: " + ex.getMessage());
-      System.exit(2);
-    } catch (InstantiationException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
-      System.err.println("calculateSolution InstantiationException: " + ex.getMessage());
-      System.exit(2);
-    } catch (IllegalAccessException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
-      System.err.println("calculateSolution IllegalAccessException: " + ex.getMessage());
-      System.exit(2);
-    }
-
+  public void solve() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    Class clazz = Class.forName(this.solverClass);
+    PlanSolverInterface ps = (PlanSolverInterface) clazz.newInstance();
+    this.solutionMap = ps.solve(this.taskMap, this.resourceMap);
   }
   
   public Map getSolutionMap() {

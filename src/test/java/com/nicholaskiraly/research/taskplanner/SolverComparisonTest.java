@@ -3,6 +3,8 @@ package com.nicholaskiraly.research.taskplanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -44,7 +46,7 @@ public class SolverComparisonTest {
    * @throws TaskPlannerException
    */
   @Test
-  public void testPlanSolverBruteForce() throws IOException, FileNotFoundException, TaskPlannerException {
+  public void testPlanSolverBruteForce() throws IOException, FileNotFoundException, TaskPlannerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
     String taskFileName = "/tasks001.yml";
     File taskFile = new File(getClass().getResource(taskFileName).getFile());

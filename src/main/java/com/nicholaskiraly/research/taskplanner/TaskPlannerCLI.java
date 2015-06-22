@@ -97,7 +97,21 @@ public class TaskPlannerCLI {
       System.exit(2);
     }
 
-    planner.solve();
+    try {
+      planner.solve();
+    } catch (ClassNotFoundException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("solve ClassNotFoundException: " + ex.getMessage());
+      System.exit(2);
+    } catch (InstantiationException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("solve InstantiationException: " + ex.getMessage());
+      System.exit(2);
+    } catch (IllegalAccessException ex) {
+      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("solve IllegalAccessException: " + ex.getMessage());
+      System.exit(2);
+    }
 
     String solutionYaml = planner.getSolutionYaml();
 

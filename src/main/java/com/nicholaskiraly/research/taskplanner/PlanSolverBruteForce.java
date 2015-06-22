@@ -13,14 +13,40 @@ public class PlanSolverBruteForce implements PlanSolverInterface {
   @Override
   public Map solve(Map taskMap, Map resourceMap) {
     Map sortedTaskMap = this.orderTaskDepends(taskMap);
-    
-    // now with a dependency sorted task map
-    // create a job schedule that will meet the requirements of the job dependencies
-    LinkedHashMap map = new LinkedHashMap();
-    map.put("task1", "compute1");
-    map.put("task2", "compute1");
-    map.put("task3", "compute3");
-    return map;
+
+    // now with a dependency sorted task resourcesMetPlanMap
+    // create a job schedule that will meet the resource requirements of the tasks in order
+    LinkedHashMap resourcesMetPlanMap = new LinkedHashMap();
+    List<Map.Entry<String, Map>> taskList = new LinkedList<>(taskMap.entrySet());
+    List<Map.Entry<String, Integer>> resourceList = new LinkedList<>(resourceMap.entrySet());
+
+    for (Iterator<Map.Entry<String, Map>> tlit = taskList.iterator(); tlit.hasNext();) {
+      Map.Entry<String, Map> taskEntry = tlit.next();
+
+      String taskName = taskEntry.getKey();
+      Map taskReqs = taskEntry.getValue();
+
+      Integer taskCores = Integer.parseInt(taskReqs.get("cores_required").toString());
+      Integer taskExecutionTime = Integer.parseInt(taskReqs.get("execution_time").toString());
+
+      for (Iterator<Map.Entry<String, Integer>> rlit = resourceList.iterator(); rlit.hasNext();) {
+        Map.Entry<String, Integer> resourceEntry = rlit.next();
+        String resourceName = resourceEntry.getKey();
+        Integer resourceCores = resourceEntry.getValue();
+        
+        // if the resource has enough cores for the task, make the plan step use the resource
+        if ( resourceCores >= taskCores ) {
+          resourcesMetPlanMap.put(taskName, resourceName);
+          break;
+        }
+      }
+      
+      // TODO: resource concurrency management ?
+
+      // TODO: resource aggregat time usage optimization ?
+      
+    }
+    return resourcesMetPlanMap;
   }
 
   /**

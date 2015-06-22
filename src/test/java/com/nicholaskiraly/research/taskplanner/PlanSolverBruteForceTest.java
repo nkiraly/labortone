@@ -82,10 +82,10 @@ public class PlanSolverBruteForceTest {
   @DataProvider
   public static String[] provideTaskFileResources() {
     return new String[]{
-      "/tasks002_unsorted.yml",
-      "/tasks003_unsorted.yml",
-      "/tasks004_unsorted.yml",
-      "/tasks005_unsorted.yml",
+      "/tasks002_unsorted001.yml",
+      "/tasks002_unsorted002.yml",
+      "/tasks002_unsorted003.yml",
+      "/tasks002_unsorted004.yml",
     };
   }
 

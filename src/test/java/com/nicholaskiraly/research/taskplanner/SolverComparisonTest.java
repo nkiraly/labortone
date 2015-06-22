@@ -44,7 +44,7 @@ public class SolverComparisonTest {
   }
 
   /**
-   * Test PlanSolverBruteForce against known static solution
+   * Test all the PlanSolvers
    *
    * @throws IOException
    * @throws FileNotFoundException
@@ -52,7 +52,7 @@ public class SolverComparisonTest {
    */
   @Test
   @UseDataProvider("providePlanSolverVariants")
-  public void testPlanSolverBruteForce(String taskFileName, String resourceFileName, String planSolverClass, String expectedPlanFileName) throws IOException, FileNotFoundException, TaskPlannerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+  public void testPlanSolvers(String planSolverClass, String taskFileName, String resourceFileName, String expectedPlanFileName) throws IOException, FileNotFoundException, TaskPlannerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
     File taskFile = new File(getClass().getResource(taskFileName).getFile());
     File resourceFile = new File(getClass().getResource(resourceFileName).getFile());
@@ -64,13 +64,18 @@ public class SolverComparisonTest {
     planner.loadResourcesFromFile(resourceFile);
 
     planner.setSolverClass(planSolverClass);
+    
+    File expectedPlanFile = new File(getClass().getResource(expectedPlanFileName).getFile());
+    String expectedPlanYamlString = IOUtils.toString(expectedPlanFile.toURI());
+    
+    // special case to load expectedPlan yaml PlanSolver is Static baseline implementation
+    if ( planSolverClass.equals("PlanSolverStatic") ) {
+      PlanSolverStatic.setSolutionYamlString(expectedPlanYamlString);
+    }
 
     planner.solve();
 
     String planYamlString = planner.getSolutionYaml();
-
-    File expectedPlanFile = new File(getClass().getResource(expectedPlanFileName).getFile());
-    String expectedPlanYamlString = IOUtils.toString(expectedPlanFile.toURI());
 
     assertEquals(expectedPlanYamlString, planYamlString);
   }
@@ -85,7 +90,8 @@ public class SolverComparisonTest {
   @DataProvider
   public static Object[][] providePlanSolverVariants() {
     return new Object[][]{
-      {"/tasks001.yml", "/resources001.yml", "PlanSolverBruteForce", "/plan001.yml"},
+      {"PlanSolverStatic",     "/tasks001.yml", "/resources001.yml", "/plan001.yml"},
+      {"PlanSolverBruteForce", "/tasks001.yml", "/resources001.yml", "/plan001.yml"},
     };
   }
 

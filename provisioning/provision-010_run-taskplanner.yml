@@ -2,6 +2,8 @@
 
 this_machine_ip=$1
 
+echo "TaskPlanner Provisioning Step 010 - build taskplanner maven project"
+
 ansible=`which ansible-playbook 2>/dev/null`
 
 # abort on error
@@ -18,6 +20,8 @@ cd /vagrant
 
 # do a full fresh build of the taskplanner jar
 mvn clean verify
+
+echo "TaskPlanner Provisioning Step 010 - calling taskplanner jar with test input files"
 
 # run the taskplanner application with sample data file resources in the projectg
 # these are the same file resources the junit tests use

@@ -37,12 +37,12 @@ Vagrant.configure('2') do |config|
     # provision step 002
     if is_windows
       # if vagrant host is windows, use shell to run ansible inside the VM
-      taskplanner.vm.provision 'shell', path: 'provisioning/provision-002_runtime.sh', args: [MACHINE_IP], privileged: false
+      taskplanner.vm.provision 'shell', path: 'provisioning/provision-002_java-toolchain.sh', args: [MACHINE_IP], privileged: false
     else
       # if no os cases, use host ansible to provision runtime
       # specify a vagrant provisioner to make sure runtime and configuration is as expected
       taskplanner.vm.provision 'ansible' do |ansible|
-        ansible.playbook = "provisioning/provision-002_runtime.yml"
+        ansible.playbook = "provisioning/provision-002_java-toolchain.yml"
         # debug
         # ansible.verbose = 'vvvv'
       end

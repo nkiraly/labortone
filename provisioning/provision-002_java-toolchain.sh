@@ -2,7 +2,7 @@
 
 this_machine_ip=$1
 
-echo "TaskPlanner Provisioning 002 Starting - java runtime and toolchain configuration"
+echo "TaskPlanner Provisioning Step 002 - java runtime and toolchain configuration"
 
 ansible=`which ansible-playbook 2>/dev/null`
 
@@ -23,4 +23,4 @@ cd /vagrant
 $ansible \
   -i 'localhost,' \
   -c local \
-  provisioning/provision-002_runtime.yml
+  provisioning/provision-002_java-toolchain.yml

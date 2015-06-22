@@ -65,9 +65,10 @@ public class TaskPlanner {
   }
   
   /**
-   * Solver class to use when calculating the solution
+   * Solver class to use when solving the task plan
+   * Use PlanSolverBruteForce by default
    */
-  protected String solverClass = "com.nicholaskiraly.research.taskplanner.PlanSolverStatic";
+  protected String solverClass = "com.nicholaskiraly.research.taskplanner.PlanSolverBruteForce";
   
   public void setSolverClass(String className) {
     // if there are no namespace qualifiers on the class

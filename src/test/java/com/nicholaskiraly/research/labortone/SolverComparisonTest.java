@@ -1,4 +1,4 @@
-package com.nicholaskiraly.research.taskplanner;
+package com.nicholaskiraly.research.labortone;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
@@ -47,16 +47,16 @@ public class SolverComparisonTest {
    *
    * @throws IOException
    * @throws FileNotFoundException
-   * @throws TaskPlannerException
+   * @throws LaborToneException
    */
   @Test
   @UseDataProvider("providePlanSolverVariants")
-  public void testPlanSolvers(String planSolverClass, String taskFileName, String resourceFileName, String expectedPlanFileName) throws IOException, FileNotFoundException, TaskPlannerException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+  public void testPlanSolvers(String planSolverClass, String taskFileName, String resourceFileName, String expectedPlanFileName) throws IOException, FileNotFoundException, LaborToneException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
     File taskFile = new File(getClass().getResource(taskFileName).getFile());
     File resourceFile = new File(getClass().getResource(resourceFileName).getFile());
 
-    TaskPlanner planner = new TaskPlanner();
+    LaborTone planner = new LaborTone();
 
     planner.loadTasksFromFile(taskFile);
 

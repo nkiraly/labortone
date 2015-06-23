@@ -1,4 +1,4 @@
-package com.nicholaskiraly.research.taskplanner;
+package com.nicholaskiraly.research.labortone;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,6 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Task execution plan implementation that takes a brute-force linear approach
+ * to solving the task execution plan
+ */
 public class PlanSolverBruteForce implements PlanSolverInterface {
 
   @Override

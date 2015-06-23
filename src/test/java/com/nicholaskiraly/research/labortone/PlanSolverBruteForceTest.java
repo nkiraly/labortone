@@ -1,4 +1,4 @@
-package com.nicholaskiraly.research.taskplanner;
+package com.nicholaskiraly.research.labortone;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;

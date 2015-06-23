@@ -1,6 +1,6 @@
 ---
 
-- name: TaskPlanner testing VM runtime and configuration
+- name: LaborTone testing VM runtime and configuration
   hosts: all
   gather_facts: no
   sudo: yes

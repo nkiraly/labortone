@@ -1,11 +1,12 @@
-package com.nicholaskiraly.research.taskplanner;
+package com.nicholaskiraly.research.labortone;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 /**
- * Baseline static plan solver to compare various planner implementations against
+ * Baseline static plan solver to test the planner processing implementation and
+ * compare PlanSolver implementations against
  */
 public class PlanSolverStatic implements PlanSolverInterface {
 

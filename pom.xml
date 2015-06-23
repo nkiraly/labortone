@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.nicholaskiraly.research</groupId>
-  <artifactId>taskplanner</artifactId>
+  <artifactId>labortone</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>TaskPlanner</name>
+  <name>LaborTone</name>
   <description>Task Planner for calculating the fastest task schedule for heterogeneous nodes</description>
 
   <developers>
@@ -79,7 +79,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>com.nicholaskiraly.research.taskplanner.TaskPlannerCLI</mainClass>
+              <mainClass>com.nicholaskiraly.research.labortone.LaborToneCLI</mainClass>
             </manifest>
           </archive>
         </configuration>

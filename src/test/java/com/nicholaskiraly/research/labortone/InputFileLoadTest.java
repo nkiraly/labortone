@@ -1,4 +1,4 @@
-package com.nicholaskiraly.research.taskplanner;
+package com.nicholaskiraly.research.labortone;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,16 +38,16 @@ public class InputFileLoadTest {
    * Test that a tasks definition yaml file can be loaded by the planner API
    *
    * @throws IOException
-   * @throws TaskPlannerException
+   * @throws LaborToneException
    */
   @Test
-  public void testLoadTasksFromFile() throws IOException, TaskPlannerException {
+  public void testLoadTasksFromFile() throws IOException, LaborToneException {
     String taskFileName = "/tasks001.yml";
     assertNotNull("Tasks resource " + taskFileName + " not found on class path", getClass().getResource(taskFileName));
     File taskFile = new File(getClass().getResource(taskFileName).getFile());
     assertTrue("Tasks file " + taskFileName + " does not exist", taskFile.exists());
 
-    TaskPlanner planner = new TaskPlanner();
+    LaborTone planner = new LaborTone();
 
     planner.loadTasksFromFile(taskFile);
 
@@ -62,16 +62,16 @@ public class InputFileLoadTest {
    * Test that a resources definition yaml file can be loaded by the planner API
    *
    * @throws IOException
-   * @throws TaskPlannerException
+   * @throws LaborToneException
    */
   @Test
-  public void testLoadResourcesFromFile() throws IOException, TaskPlannerException {
+  public void testLoadResourcesFromFile() throws IOException, LaborToneException {
     String resourceFileName = "/resources001.yml";
     assertNotNull("Resources resource " + resourceFileName + " not found on class path", getClass().getResource(resourceFileName));
     File resourceFile = new File(getClass().getResource(resourceFileName).getFile());
     assertTrue("Resources file " + resourceFileName + " does not exist", resourceFile.exists());
 
-    TaskPlanner planner = new TaskPlanner();
+    LaborTone planner = new LaborTone();
 
     planner.loadResourcesFromFile(resourceFile);
 

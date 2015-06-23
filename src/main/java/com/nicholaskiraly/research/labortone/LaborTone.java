@@ -1,4 +1,4 @@
-package com.nicholaskiraly.research.taskplanner;
+package com.nicholaskiraly.research.labortone;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +12,10 @@ import org.apache.commons.io.IOUtils;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.DumperOptions;
 
-public class TaskPlanner {
+/**
+ * LaborTone solution solver process implementation
+ */
+public class LaborTone {
 
   /**
    * Tasks to be performed
@@ -29,13 +32,13 @@ public class TaskPlanner {
    */
   protected Map solutionMap;
 
-  public void loadTasksFromFile(File taskFile) throws FileNotFoundException, IOException, TaskPlannerException {
+  public void loadTasksFromFile(File taskFile) throws FileNotFoundException, IOException, LaborToneException {
     FileInputStream taskFIS = new FileInputStream(taskFile);
     Yaml yaml = new Yaml();
     String taskContent = IOUtils.toString(taskFIS);
     LinkedHashMap map = (LinkedHashMap) yaml.load(taskContent);
     if (map.size() == 0) {
-      throw new TaskPlannerException("No tasks found in taskFile " + taskFile.getPath());
+      throw new LaborToneException("No tasks found in taskFile " + taskFile.getPath());
     }
     //System.out.println(map);
     this.taskMap = map;
@@ -45,13 +48,13 @@ public class TaskPlanner {
     return this.taskMap;
   }
 
-  public void loadResourcesFromFile(File resourceFile) throws FileNotFoundException, IOException, TaskPlannerException {
+  public void loadResourcesFromFile(File resourceFile) throws FileNotFoundException, IOException, LaborToneException {
     FileInputStream resourceFIS = new FileInputStream(resourceFile);
     Yaml yaml = new Yaml();
     String resourceContent = IOUtils.toString(resourceFIS);
     LinkedHashMap map = (LinkedHashMap) yaml.load(resourceContent);
     if (map.size() == 0) {
-      throw new TaskPlannerException("No resources found in resourceFile " + resourceFile.getPath());
+      throw new LaborToneException("No resources found in resourceFile " + resourceFile.getPath());
     }
     //System.out.println(map);
     this.resourceMap = map;
@@ -65,13 +68,13 @@ public class TaskPlanner {
    * Solver class to use when solving the task plan
    * Use PlanSolverBruteForce by default
    */
-  protected String solverClass = "com.nicholaskiraly.research.taskplanner.PlanSolverBruteForce";
+  protected String solverClass = "com.nicholaskiraly.research.labortone.PlanSolverBruteForce";
   
   public void setSolverClass(String className) {
     // if there are no period namespace delimiters in the className
-    // prefix it with  com.nicholaskiraly.research.taskplanner.
+    // prefix it with  com.nicholaskiraly.research.labortone.
     if (!className.contains(".")) {
-      className = "com.nicholaskiraly.research.taskplanner." + className;
+      className = "com.nicholaskiraly.research.labortone." + className;
     }
     this.solverClass = className;
   }

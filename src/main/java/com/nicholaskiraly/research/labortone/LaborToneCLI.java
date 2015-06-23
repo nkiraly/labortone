@@ -1,4 +1,4 @@
-package com.nicholaskiraly.research.taskplanner;
+package com.nicholaskiraly.research.labortone;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,9 +14,12 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-public class TaskPlannerCLI {
+/**
+ * LaborTone command line interface static main implementation class
+ */
+public class LaborToneCLI {
 
-  public static final String CLI_APP_NAME = "taskplanner";
+  public static final String CLI_APP_NAME = "labortone";
 
   public static void main(String[] args) {
     CommandLineParser parser = new DefaultParser();
@@ -47,7 +50,7 @@ public class TaskPlannerCLI {
     try {
       cl = parser.parse(options, args);
     } catch (ParseException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LaborToneCLI.class.getName()).log(Level.SEVERE, null, ex);
       System.err.println("CommandLine ParseException: " + ex.getMessage());
       System.exit(2);
     }
@@ -55,19 +58,19 @@ public class TaskPlannerCLI {
     // validate command line arguments
     if (!cl.hasOption("taskfile")) {
       System.err.println("taskfile not specified");
-      TaskPlannerCLI.showHelp(options);
+      LaborToneCLI.showHelp(options);
       System.exit(5);
     }
     File taskFile = new File(cl.getOptionValue("taskfile"));
 
     if (!cl.hasOption("resourcefile")) {
       System.err.println("resourcefile not specified");
-      TaskPlannerCLI.showHelp(options);
+      LaborToneCLI.showHelp(options);
       System.exit(5);
     }
     File resourceFile = new File(cl.getOptionValue("resourcefile"));
 
-    TaskPlanner planner = new TaskPlanner();
+    LaborTone planner = new LaborTone();
 
     if (cl.hasOption("solverclass")) {
       planner.setSolverClass(cl.getOptionValue("solverclass"));
@@ -76,39 +79,39 @@ public class TaskPlannerCLI {
     try {
       planner.loadTasksFromFile(taskFile);
     } catch (IOException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LaborToneCLI.class.getName()).log(Level.SEVERE, null, ex);
       System.err.println("loadTasksFromFile IOException: " + ex.getMessage());
       System.exit(2);
-    } catch (TaskPlannerException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
-      System.err.println("loadTasksFromFile TaskPlannerException: " + ex.getMessage());
+    } catch (LaborToneException ex) {
+      Logger.getLogger(LaborToneCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("loadTasksFromFile LaborToneException: " + ex.getMessage());
       System.exit(2);
     }
 
     try {
       planner.loadResourcesFromFile(resourceFile);
     } catch (IOException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LaborToneCLI.class.getName()).log(Level.SEVERE, null, ex);
       System.err.println("loadResourcesFromFile IOException: " + ex.getMessage());
       System.exit(2);
-    } catch (TaskPlannerException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
-      System.err.println("loadResourcesFromFile TaskPlannerException: " + ex.getMessage());
+    } catch (LaborToneException ex) {
+      Logger.getLogger(LaborToneCLI.class.getName()).log(Level.SEVERE, null, ex);
+      System.err.println("loadResourcesFromFile LaborToneException: " + ex.getMessage());
       System.exit(2);
     }
 
     try {
       planner.solve();
     } catch (ClassNotFoundException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LaborToneCLI.class.getName()).log(Level.SEVERE, null, ex);
       System.err.println("solve ClassNotFoundException: " + ex.getMessage());
       System.exit(2);
     } catch (InstantiationException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LaborToneCLI.class.getName()).log(Level.SEVERE, null, ex);
       System.err.println("solve InstantiationException: " + ex.getMessage());
       System.exit(2);
     } catch (IllegalAccessException ex) {
-      Logger.getLogger(TaskPlannerCLI.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LaborToneCLI.class.getName()).log(Level.SEVERE, null, ex);
       System.err.println("solve IllegalAccessException: " + ex.getMessage());
       System.exit(2);
     }

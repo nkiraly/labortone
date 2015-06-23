@@ -2,7 +2,7 @@
 
 this_machine_ip=$1
 
-echo "TaskPlanner Provisioning Step 010 - build taskplanner maven project"
+echo "LaborTone Provisioning Step 010 - build labortone maven project"
 
 ansible=`which ansible-playbook 2>/dev/null`
 
@@ -18,13 +18,13 @@ fi
 # switch to vagrant shared folder from hosts' project working dir
 cd /vagrant
 
-# do a full fresh build of the taskplanner jar
+# do a full fresh build of the labortone jar
 mvn clean verify
 
-echo "TaskPlanner Provisioning Step 010 - calling taskplanner jar with test input files"
+echo "LaborTone Provisioning Step 010 - calling labortone jar with test input files"
 
-# run the taskplanner application with sample data file resources in the projectg
+# run the labortone application with sample data file resources in the projectg
 # these are the same file resources the junit tests use
-java -jar target/taskplanner-0.1.0-SNAPSHOT-withdepends.jar \
+java -jar target/labortone-0.1.0-SNAPSHOT-withdepends.jar \
   --taskfile src/test/resources/tasks001.yml \
   --resourcefile src/test/resources/resources001.yml

@@ -2,7 +2,7 @@
 
 this_machine_ip=$1
 
-echo "TaskPlanner Provisioning Step 002 - java runtime and toolchain configuration"
+echo "LaborTone Provisioning Step 002 - java runtime and toolchain configuration"
 
 ansible=`which ansible-playbook 2>/dev/null`
 
@@ -18,7 +18,7 @@ fi
 # switch to vagrant shared folder from hosts' project working dir
 cd /vagrant
 
-# use ansible to provision this VM with runtime and configuration we need to run the taskplanner java jar
+# use ansible to provision this VM with runtime and configuration we need to run the labortone java jar
 # inventory string 'localhost,' makes python consider the text a list and ansible will run with this
 $ansible \
   -i 'localhost,' \

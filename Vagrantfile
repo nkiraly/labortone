@@ -50,7 +50,7 @@ Vagrant.configure('2') do |config|
 
     # provision step 010
     # specify a shell provisioner to build labortone jar and run it
-    labortone.vm.provision 'shell', path: 'provisioning/provision-010_run-labortone.yml', args: [MACHINE_IP], privileged: false
+    labortone.vm.provision 'shell', path: 'provisioning/provision-010_run-labortone.sh', args: [MACHINE_IP], privileged: false
   end
 
 end

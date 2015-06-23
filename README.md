@@ -2,6 +2,8 @@
 
 LaborTone is a java-based compute task to heterogeneous resource execution planner.
 
+[![nkiraly/labortone/master Build Status](https://travis-ci.org/nkiraly/labortone.png?branch=master)](https://travis-ci.org/nkiraly/labortone)
+
 # Overview
 To ensure that the best planner algorithm can be developed, the input (tasks and resources) and output (task execution plan) are defined as data maps and are processed by the specified PlanSolverInterface implementation class. This approach allows for any and all algorithms and their variants to be explored, developed, and tested for speed and accuracy in a consistent way.
 

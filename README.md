@@ -1,4 +1,4 @@
-LaborTone
+# LaborTone
 
 LaborTone is a java-based compute task to heterogeneous resource execution planner.
 
@@ -21,8 +21,8 @@ $ java -jar target/labortone-0.1.0-SNAPSHOT-withdepends.jar \
   --resourcefile src/test/resources/resources001.yml
 ```
 
-# Testing LaborTone in the targeted test environment
-For testing consistency, wind up the vagrant and virtualbox managed CentOS VM with
+# Testing
+For testing consistency, use the vagrant and virtualbox managed CentOS VM with
 
 ```bash
 $ vagrant up

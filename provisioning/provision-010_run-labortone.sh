@@ -23,7 +23,7 @@ mvn clean verify
 
 echo "LaborTone Provisioning Step 010 - calling labortone jar with test input files"
 
-# run the labortone application with sample data file resources in the projectg
+# run the labortone application with sample data file resources in the project
 # these are the same file resources the junit tests use
 java -jar target/labortone-0.1.0-SNAPSHOT-withdepends.jar \
   --taskfile src/test/resources/tasks001.yml \
